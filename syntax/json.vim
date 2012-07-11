@@ -54,7 +54,8 @@ syn keyword jsonBoolean   true false
 syn keyword jsonNull      null
 
 " Syntax: Braces {{{2
-syn match   jsonBraces	   "[{}\[\]]"
+syn region jsonFold matchgroup=jsonBraces start="{" end="}" transparent fold
+syn region jsonFold matchgroup=jsonBraces start="\[" end="]" transparent fold
 
 " Define the default highlighting. {{{1
 " For version 5.7 and earlier: only when not done already
