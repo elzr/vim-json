@@ -27,11 +27,11 @@ syn region  jsonStringSQ oneline  start=+'+  skip=+\\\\\|\\"+  end=+'+
 
 " Syntax: JSON Keywords
 " Separated into a match and region because a region by itself is always greedy
-syn match jsonKeywordMatch /"[^\"\:]\+"\:/ contains=jsonKeywordRegion
+syn match jsonKeywordMatch /"[^\"\:]\+"\s*\:/ contains=jsonKeywordRegion
 if has('conceal')
-   syn region jsonKeywordRegion matchgroup=Quote start=/"/  end=/"\ze\:/ concealends contained
+   syn region jsonKeywordRegion matchgroup=Quote start=/"/  end=/"\ze\s*\:/ concealends contained
 else
-   syn region jsonKeywordRegion matchgroup=Quote start=/"/  end=/"\ze\:/ contained
+   syn region jsonKeywordRegion matchgroup=Quote start=/"/  end=/"\ze\s*\:/ contained
 endif
 
 " Syntax: Escape sequences
