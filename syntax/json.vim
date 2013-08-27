@@ -13,13 +13,15 @@ if !exists("main_syntax")
   let main_syntax = 'json'
 endif
 
+syntax match   jsonNoise           /\%(:\|,\)/
+
 " NOTE that for the concealing to work your conceallevel should be set to 2
 
 " Syntax: Strings
 if has('conceal')
-   syn region  jsonString oneline matchgroup=Quote start=/"/  skip=/\\\\\|\\"/  end=/"/ concealends contains=jsonEscape
+   syn region  jsonString oneline matchgroup=jsonQuote start=/"/  skip=/\\\\\|\\"/  end=/"/ concealends contains=jsonEscape
 else
-   syn region  jsonString oneline matchgroup=Quote start=/"/  skip=/\\\\\|\\"/  end=/"/ contains=jsonEscape
+   syn region  jsonString oneline matchgroup=jsonQuote start=/"/  skip=/\\\\\|\\"/  end=/"/ contains=jsonEscape
 endif
 
 " Syntax: JSON does not allow strings with single quotes, unlike JavaScript.
@@ -29,9 +31,9 @@ syn region  jsonStringSQ oneline  start=+'+  skip=+\\\\\|\\"+  end=+'+
 " Separated into a match and region because a region by itself is always greedy
 syn match  jsonKeywordMatch /"[^\"\:]\+"[[:blank:]\r\n]*\:/ contains=jsonKeywordRegion
 if has('conceal')
-   syn region  jsonKeywordRegion matchgroup=Quote start=/"/  end=/"\ze[[:blank:]\r\n]*\:/ concealends contained
+   syn region  jsonKeywordRegion matchgroup=jsonQuote start=/"/  end=/"\ze[[:blank:]\r\n]*\:/ concealends contained
 else
-   syn region  jsonKeywordRegion matchgroup=Quote start=/"/  end=/"\ze[[:blank:]\r\n]*\:/ contained
+   syn region  jsonKeywordRegion matchgroup=jsonQuote start=/"/  end=/"\ze[[:blank:]\r\n]*\:/ contained
 endif
 
 " Syntax: Escape sequences
@@ -52,7 +54,7 @@ syn match   jsonNumError  "-\=\<0\d\.\d*\>"
 " Syntax: Decimals smaller than one should begin with 0 (so .1 should be 0.1).
 syn match   jsonNumError  "\:\@<=[[:blank:]\r\n]*\zs\.\d\+"
 
-" Syntax: No comments in JSON, see http://stackoverflow.com/questions/244777/can-i-comment-a-json-file 
+" Syntax: No comments in JSON, see http://stackoverflow.com/questions/244777/can-i-comment-a-json-file
 syn match   jsonCommentError  "//.*"
 syn match   jsonCommentError  "\(/\*\)\|\(\*/\)"
 
@@ -65,7 +67,7 @@ syn match   jsonCommaError  ",\_s*[}\]]"
 " ********************************************** END OF ERROR WARNINGS
 " Allowances for JSONP: function call at the beginning of the file,
 " parenthesis and semicolon at the end.
-" Function name validation based on 
+" Function name validation based on
 " http://stackoverflow.com/questions/2008279/validate-a-javascript-function-name/2008444#2008444
 syn match  jsonPadding "\%^[[:blank:]\r\n]*[_$[:alpha:]][_$[:alnum:]]*[[:blank:]\r\n]*("
 syn match  jsonPadding ");[[:blank:]\r\n]*\%$"
@@ -90,21 +92,23 @@ if version >= 508 || !exists("did_json_syn_inits")
   else
     command -nargs=+ HiLink hi def link <args>
   endif
-  HiLink jsonPadding				Operator
-  HiLink jsonString				String
-  HiLink jsonEscape				Special
-  HiLink jsonNumber				Number
-  HiLink jsonBraces				Operator
-  HiLink jsonNull					Function
-  HiLink jsonBoolean				Boolean
-  HiLink jsonKeywordRegion		Label
+  HiLink jsonPadding         Operator
+  HiLink jsonString          String
+  HiLink jsonEscape          Special
+  HiLink jsonNumber          Number
+  HiLink jsonBraces          Operator
+  HiLink jsonNull            Function
+  HiLink jsonBoolean         Boolean
+  HiLink jsonKeywordRegion   Label
 
-  HiLink jsonNumError			Error
-  HiLink jsonCommentError		Error
-  HiLink jsonSemicolonError	Error
-  HiLink jsonCommaError			Error
-  HiLink jsonStringSQ			Error
-  HiLink jsonNoQuotes			Error
+  HiLink jsonNumError        Error
+  HiLink jsonCommentError    Error
+  HiLink jsonSemicolonError  Error
+  HiLink jsonCommaError      Error
+  HiLink jsonStringSQ        Error
+  HiLink jsonNoQuotes        Error
+  HiLink jsonQuote           Quote
+  HiLink jsonNoise           Noise
   delcommand HiLink
 endif
 
@@ -117,7 +121,7 @@ endif
 " vim: ts=8 fdm=marker
 
 " MIT License
-" Copyright (c) 2013, Jeroen Ruigrok van der Werven, Eli Parra 
+" Copyright (c) 2013, Jeroen Ruigrok van der Werven, Eli Parra
 "Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the Software), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 "The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 "THE SOFTWARE IS PROVIDED AS IS, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
