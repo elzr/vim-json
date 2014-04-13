@@ -5,6 +5,7 @@ Better JSON for VIM
 ![JSON syntax coloring](http://farm8.staticflickr.com/7234/7185560283_102f6b753d.jpg)  
 Customization of Jeroen Ruigrok van der Werven's [vim-json highlighting script](http://www.vim.org/scripts/script.php?script_id=1945) with Rogerz Zhang's [indent script](https://github.com/vim-scripts/vim-json-bundle).  
 [Pathogen-friendly.](https://github.com/tpope/vim-pathogen)  
+[Vundle-friendly](https://github.com/gmarik/Vundle.vim): Simply install vundle, add <code>Plugin 'elzr/vim-json'</code> to your .vimrc and type <code>:PluginInstall</code> in normal mode.
 
 Specific customizations
 -----------------------
