@@ -31,7 +31,7 @@ syn region  jsonStringSQError oneline  start=+'+  skip=+\\\\\|\\"+  end=+'+
 
 " Syntax: JSON Keywords
 " Separated into a match and region because a region by itself is always greedy
-syn match  jsonKeywordMatch /"[^\"\:]\+"[[:blank:]\r\n]*\:/ contains=jsonKeyword
+syn match  jsonKeywordMatch /"[^\"]\+"[[:blank:]\r\n]*\:/ contains=jsonKeyword
 if has('conceal')
    syn region  jsonKeyword matchgroup=jsonQuote start=/"/  end=/"\ze[[:blank:]\r\n]*\:/ concealends contained
 else
