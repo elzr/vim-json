@@ -26,3 +26,7 @@ if has('conceal')
 	"maybe g:vim_json_syntax_conceal could be settable to 0,1,2 to map
 	"directly to vim's conceallevels? unsure if anyone cares
 endif
+
+if !exists("g:vim_json_allow_colon_in_key")
+	let g:vim_json_allow_colon_in_key = 0
+end

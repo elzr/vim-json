@@ -31,7 +31,11 @@ syn region  jsonStringSQError oneline  start=+'+  skip=+\\\\\|\\"+  end=+'+
 
 " Syntax: JSON Keywords
 " Separated into a match and region because a region by itself is always greedy
-syn match  jsonKeywordMatch /"[^\"\:]\+"[[:blank:]\r\n]*\:/ contains=jsonKeyword
+let s:colon = ''
+if g:vim_json_allow_colon_in_key == 0
+	let s:colon = '\:'
+endif
+execute 'syn match  jsonKeywordMatch /"[^\"' . s:colon . ']\+"[[:blank:]\r\n]*\:/ contains=jsonKeyword'
 if has('conceal')
    syn region  jsonKeyword matchgroup=jsonQuote start=/"/  end=/"\ze[[:blank:]\r\n]*\:/ concealends contained
 else
