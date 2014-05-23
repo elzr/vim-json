@@ -46,7 +46,7 @@ syn match   jsonEscape    "\\u\x\{4}" contained
 syn match   jsonNumber    "-\=\<\%(0\|[1-9]\d*\)\%(\.\d\+\)\=\%([eE][-+]\=\d\+\)\=\>\ze[[:blank:]\r\n]*[,}\]]"
 
 " ERROR WARNINGS **********************************************
-if (g:vim_json_warnings == 1)
+if exists("g:vim_json_warnings") && (g:vim_json_warnings == 1)
 	" Syntax: Strings should always be enclosed with quotes.
 	syn match   jsonNoQuotesError  "\<[[:alpha:]]\+\>"
 
@@ -111,7 +111,7 @@ if version >= 508 || !exists("did_json_syn_inits")
   HiLink jsonBoolean         Boolean
   HiLink jsonKeyword         Label
 
-	if (g:vim_json_warnings == 1)
+	if exists("g:vim_json_warnings") && (g:vim_json_warnings == 1)
 	  HiLink jsonNumError        Error
 	  HiLink jsonCommentError    Error
 	  HiLink jsonSemicolonError  Error
