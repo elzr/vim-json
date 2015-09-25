@@ -60,9 +60,11 @@ if (!exists("g:vim_json_warnings") || g:vim_json_warnings==1)
 	" Syntax: Decimals smaller than one should begin with 0 (so .1 should be 0.1).
 	syn match   jsonNumError  "\:\@<=[[:blank:]\r\n]*\zs\.\d\+"
 
-	" Syntax: No comments in JSON, see http://stackoverflow.com/questions/244777/can-i-comment-a-json-file
-	syn match   jsonCommentError  "//.*"
-	syn match   jsonCommentError  "\(/\*\)\|\(\*/\)"
+  if (!exists("g:vim_json_comments") || g:vim_json_comments==0)
+    " Syntax: No comments in JSON, see http://stackoverflow.com/questions/244777/can-i-comment-a-json-file
+    syn match   jsonCommentError  "//.*"
+    syn match   jsonCommentError  "\(/\*\)\|\(\*/\)"
+  endif
 
 	" Syntax: No semicolons in JSON
 	syn match   jsonSemicolonError  ";"
@@ -75,6 +77,14 @@ if (!exists("g:vim_json_warnings") || g:vim_json_warnings==1)
 	syn match   jsonMissingCommaError /\(\]\|\}\)\_s\+\ze"/ "arrays/objects as values
 	syn match   jsonMissingCommaError /}\_s\+\ze{/ "objects as elements in an array
 	syn match   jsonMissingCommaError /\(true\|false\)\_s\+\ze"/ "true/false as value
+endif
+
+" COMMENTS ****************************************************
+if (exists("g:vim_json_comments") && g:vim_json_comments==1)
+  syn keyword jsonCommentTodo  TODO FIXME XXX TBD contained
+  syn match   jsonLineComment  "\/\/.*" contains=@Spell,jsonCommentTodo
+  syn match   jsonCommentSkip  "^[ \t]*\*\($\|[ \t]\+\)"
+  syn region  jsonComment      start="/\*"  end="\*/" contains=@Spell,jsonCommentTodo
 endif
 
 " ********************************************** END OF ERROR WARNINGS
@@ -117,6 +127,13 @@ if version >= 508 || !exists("did_json_syn_inits")
 		hi def link jsonNoQuotesError				Error
 		hi def link jsonTripleQuotesError		Error
   endif
+
+  if (exists("g:vim_json_comments") && g:vim_json_comments==1)
+    hi def link jsonCommentTodo Todo
+    hi def link jsonLineComment Comment
+    hi def link jsonComment     Comment
+  endif
+
   hi def link jsonQuote			Quote
   hi def link jsonNoise			Noise
 endif

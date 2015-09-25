@@ -23,6 +23,7 @@ Specific customizations
 	* Warn about *[missing commas](https://github.com/elzr/vim-json/issues/18)* between elements of an object [and elsewhere](https://github.com/elzr/vim-json/issues/34).
 	* Warn about *trailing commas* after the last element in arrays or objects.
 	* (All warnings can be turned off with a `let g:vim_json_warnings=0` in your `vimrc`.) 
+* Optionally allow comment syntax highlighting. (turn this on with a `let g:vim_json_comments=1` in your `vimrc`.)
 * Recognize `.jsonp` file type. In [JSONP](http://stackoverflow.com/questions/2067472/what-is-jsonp-all-about), the wrapping function call at the beginning and the closing semicolon are recognized.
 
 Screenshots
