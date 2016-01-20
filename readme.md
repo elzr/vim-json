@@ -3,11 +3,22 @@
 Better JSON for VIM
 ===================
 
-*Distinct highlighting of keywords vs values, JSON-specific (non-JS) warnings, quote concealing.*  
+Distinct highlighting of keywords vs values, JSON-specific (non-JS) warnings, quote concealing.
+
 ![JSON syntax coloring](https://cloud.githubusercontent.com/assets/183877/7018898/98e428e0-dccf-11e4-9ab8-c554b3556155.jpg)
+
+
+
+
 Customization of Jeroen Ruigrok van der Werven's [vim-json highlighting script](http://www.vim.org/scripts/script.php?script_id=1945) with Rogerz Zhang's [indent script](https://github.com/vim-scripts/vim-json-bundle).  
 [Pathogen-friendly.](https://github.com/tpope/vim-pathogen) [Vundle-friendly too.](https://github.com/elzr/vim-json/issues/25) ([Or install it manually.](https://github.com/elzr/vim-json/issues/52)) 
 
+Installation
+============
+Using **Vundle** package manager
+```vim
+Plugin 'elzr/vim-json'
+```
 Specific customizations
 -----------------------
 
