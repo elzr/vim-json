@@ -95,6 +95,19 @@ syn keyword  jsonNull      null
 syn region  jsonFold matchgroup=jsonBraces start="{" end=/}\(\_s\+\ze\("\|{\)\)\@!/ transparent fold
 syn region  jsonFold matchgroup=jsonBraces start="\[" end=/]\(\_s\+\ze"\)\@!/ transparent fold
 
+"============================================
+"Syntax: Json+ld, Json Linked Data Support, http://json-ld.org/
+"Maintainer:  Kevin Olson <acidjazz@gmail.com>
+syn match jsonldKeyword /@\w\+/ contained containedin=jsonString,jsonKeyword
+syn match jsonldCurie '\w\+:\(\([^/"][^/"]\|/\?[^/"]\)[^"]*\)\+' contained containedin=jsonString,jsonKeyword
+
+hi def link jsonldKeyword Keyword
+hi def link jsonldCurie Special
+
+"=======================
+
+
+
 " Define the default highlighting.
 if version >= 508 || !exists("did_json_syn_inits")
   hi def link jsonPadding		Operator
@@ -121,10 +134,13 @@ if version >= 508 || !exists("did_json_syn_inits")
   hi def link jsonNoise			Noise
 endif
 
+
 let b:current_syntax = "json"
 if main_syntax == 'json'
   unlet main_syntax
 endif
+
+
 
 " Vim settings
 " vim: ts=8 fdm=marker
