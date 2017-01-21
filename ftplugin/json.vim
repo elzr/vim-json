@@ -36,3 +36,8 @@ if has('conceal')
 	"maybe g:vim_json_syntax_conceal could be settable to 0,1,2 to map
 	"directly to vim's conceallevels? unsure if anyone cares
 endif
+
+" pretty print JSON buffer
+if executable('python')
+  setlocal equalprg=python\ -m\ json.tool
+endif

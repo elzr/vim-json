@@ -8,6 +8,9 @@ Better JSON for VIM
 Customization of Jeroen Ruigrok van der Werven's [vim-json highlighting script](http://www.vim.org/scripts/script.php?script_id=1945) with Rogerz Zhang's [indent script](https://github.com/vim-scripts/vim-json-bundle).  
 [Pathogen-friendly.](https://github.com/tpope/vim-pathogen) [Vundle-friendly too.](https://github.com/elzr/vim-json/issues/25) ([Or install it manually.](https://github.com/elzr/vim-json/issues/52)) 
 
+Pretty-print JSON using Vim's built-in `equalprg`.  
+This requires Python, but doesn't require Vim compiled with the Python interface.  
+
 Specific customizations
 -----------------------
 
