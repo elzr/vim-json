@@ -36,3 +36,8 @@ if has('conceal')
 	"maybe g:vim_json_syntax_conceal could be settable to 0,1,2 to map
 	"directly to vim's conceallevels? unsure if anyone cares
 endif
+
+" for neovim
+if has('nvim')
+	let s:use_python = 0
+endif
