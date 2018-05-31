@@ -54,6 +54,16 @@
     }
 }
 
+// nested and escaped strings
+{
+  "stringified json": "{\"bar\": \"qux\"}",
+  "like stringified json, but not": "{\"bar\"}",
+  "also like stringified json, but not": "{\"bar\" \"qux\"}",
+  "malformatted nested stringified json": "{\"bar\": "qux"}",
+  "number": 123,
+  "boolean": true,
+  "null": null
+}
 
 {"widget": {
     "debug": "on",
