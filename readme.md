@@ -55,6 +55,28 @@ Concealing is nice for viewing but when you want to edit it should get out of yo
 
 It's a good idea to test drive with the files `json-test.json` and `jsonp-test.jsonp` first thing.
 
+### indentLine plugin
+
+If you use the [**indentLine**](https://github.com/Yggdroot/indentLine) plugin then you'll need to add some extra configuration.
+
+Pick one of these:
+
+``` .vim
+" Tell indentLine to not change concealcursor and conceallevel
+let g:indentLine_setConceal = 0
+```
+
+``` .vim
+" Set concealcursor='' when indentLine is enabled.
+" You can also set this to 'nc' or whatever you prefer.
+let g:indentLine_concealcursor = '' 
+```
+
+``` .vim
+" Disable indentLine for json filetypes
+let g:indentLine_fileTypeExclude = [ "json" ]
+```
+
 Other recommended software
 --------------------------
 * [JSON Formatter](https://chrome.google.com/webstore/detail/json-formatter/bcjindcccaagfpapjjmafapmmgkkhgoa): Chrome extension for printing JSON and JSONP nicely when you visit it 'directly' in a browser tab.
