@@ -71,10 +71,12 @@ if (!exists("g:vim_json_warnings") || g:vim_json_warnings==1)
 	syn match   jsonTrailingCommaError  ",\_s*[}\]]"
 
 	" Syntax: Watch out for missing commas between elements
-	syn match   jsonMissingCommaError /\("\|\]\|\d\)\zs\_s\+\ze"/
-	syn match   jsonMissingCommaError /\(\]\|\}\)\_s\+\ze"/ "arrays/objects as values
-	syn match   jsonMissingCommaError /}\_s\+\ze{/ "objects as elements in an array
-	syn match   jsonMissingCommaError /\(true\|false\)\_s\+\ze"/ "true/false as value
+  syn match   jsonMissingCommaError /\("\|\]\|\d\)\zs\_s\+\ze"/
+  syn match   jsonMissingCommaError /\(\]\|\}\)\_s\+\ze"/ "arrays/objects as values
+  if (expand('%:e') !=? 'jsonl')
+    syn match   jsonMissingCommaError /}\_s\+\ze{/ "objects as elements in an array
+  endif
+  syn match   jsonMissingCommaError /\(true\|false\)\_s\+\ze"/ "true/false as value
 endif
 
 " ********************************************** END OF ERROR WARNINGS
@@ -101,10 +103,10 @@ if version >= 508 || !exists("did_json_syn_inits")
   hi def link jsonString		String
   hi def link jsonTest			Label
   hi def link jsonEscape		Special
-  hi def link jsonNumber		Delimiter
+  hi def link jsonNumber		Number
   hi def link jsonBraces		Delimiter
   hi def link jsonNull			Function
-  hi def link jsonBoolean		Delimiter
+  hi def link jsonBoolean		Boolean
   hi def link jsonKeyword		Label
 
 	if (!exists("g:vim_json_warnings") || g:vim_json_warnings==1)

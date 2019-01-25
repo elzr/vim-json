@@ -51,7 +51,7 @@ This is the expected behavior of the plugin:
 
 Most trouble, little as it is, has to do with Vim's newfangled concealing, which most people aren't yet familiar with, as it was introduced as recently as Vim 7.3+. If you just don't care for concealing you can easily disable it adding `let g:vim_json_syntax_conceal = 0` to your `.vimrc`.
 
-Concealing is nice for viewing but when you want to edit it should get out of your way seamlessly so you can see the actual code. Thus the **default behavior** *should* be text shown normally on the line your cursor is at, on all modes (normal, visual, insert). If this isn't the case and the concealing doesn't go away (not even in insert mode), you most likely have **an interfering plugin**. You need to look at your `concealcursor` setting (which can be set through this plugin with `g:vim_json_syntax_concealcursor`).
+Concealing is nice for viewing but when you want to edit it should get out of your way seamlessly so you can see the actual code. Thus the **default behavior** *should* be text shown normally on the line your cursor is at, on all modes (normal, visual, insert). If this isn't the case and the concealing doesn't go away (not even in insert mode), you most likely have **an interfering plugin**. You need to look at your `concealcursor` setting (which can be set through this plugin with `g:vim_json_syntax_concealcursor`). The specially overeager [**indentLine**](https://github.com/Yggdroot/indentLine), plugin would require _yet_ an additional `let g:indentLine_concealcursor=""` in your `.vimrc` as detailed [here](https://github.com/elzr/vim-json/issues/23#issuecomment-40293049).
 
 It's a good idea to test drive with the files `json-test.json` and `jsonp-test.jsonp` first thing.
 
