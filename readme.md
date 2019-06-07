@@ -13,7 +13,7 @@ Specific customizations
 
 * Added distinct **highlighting** for keywords vs values! (This is what made me start this plugin.)
 * Added **concealing** of double quotes, for a minimalist [CoffeeScript](http://coffeescript.org/)-inspired look ([CSON](https://github.com/bevry/cson)!). 
-	* ![image](https://cloud.githubusercontent.com/assets/183877/6786803/18143984-d154-11e4-841c-134241f951ae.png)<br> [Strings are colored differently than numbers & booleans.](https://github.com/elzr/vim-json/issues/37) The disambiguating purpose of double quotes is thus achieved with colors for a cleaner look.
+	* ![image](https://cloud.githubusercontent.com/assets/183877/6786803/18143984-d154-11e4-841c-134241f951ae.png)<br> [Strings are colored differently from numbers & booleans](https://github.com/elzr/vim-json/pull/76) as long as your chosen color scheme differentiates `String`, `Number`, and `Boolean`. The disambiguating purpose of double quotes is thus achieved with colors for a cleaner look.
 	* *This requires Vim 7.3+.* To disable it add `let g:vim_json_syntax_conceal = 0` to your `.vimrc`.
 * Added **folding** of `{...}` and `[...]` blocks. To enable it `:setlocal foldmethod=syntax` (do it permanently on the `ftplugin/json.vim` file).
 * **JSON-specific warnings** (red highlights):
