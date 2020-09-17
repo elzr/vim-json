@@ -16,6 +16,22 @@ if !exists("main_syntax")
   let main_syntax = 'json'
 endif
 
+" parse options and set vars
+if has('conceal') && g:vim_json_syntax_conceal == 1
+   let conceal = " concealends"
+else
+   let conceal = ""
+endif
+
+if g:vim_json_color_quotes == 1
+	let keyword_quote_match_group = "jsonKeywordQuote"
+	let string_quote_match_group  = "jsonStringQuote"
+else
+	let keyword_quote_match_group = "jsonQuote"
+	let string_quote_match_group  = "jsonQuote"
+endif
+
+
 syntax match   jsonNoise           /\%(:\|,\)/
 
 " NOTE that for the concealing to work your conceallevel should be set to 2
@@ -23,11 +39,7 @@ syntax match   jsonNoise           /\%(:\|,\)/
 " Syntax: Strings
 " Separated into a match and region because a region by itself is always greedy
 syn match  jsonStringMatch /"\([^"]\|\\\"\)\+"\ze[[:blank:]\r\n]*[,}\]]/ contains=jsonString
-if has('conceal') && g:vim_json_syntax_conceal == 1
-	syn region  jsonString oneline matchgroup=jsonQuote start=/"/  skip=/\\\\\|\\"/  end=/"/ concealends contains=jsonEscape contained
-else
-	syn region  jsonString oneline matchgroup=jsonQuote start=/"/  skip=/\\\\\|\\"/  end=/"/ contains=jsonEscape contained
-endif
+execute 'syn region  jsonString oneline matchgroup=' . string_quote_match_group . ' start=/"/  skip=/\\\\\|\\"/  end=/"/ contains=jsonEscape contained' . conceal
 
 " Syntax: JSON does not allow strings with single quotes, unlike JavaScript.
 syn region  jsonStringSQError oneline  start=+'+  skip=+\\\\\|\\"+  end=+'+
@@ -35,11 +47,7 @@ syn region  jsonStringSQError oneline  start=+'+  skip=+\\\\\|\\"+  end=+'+
 " Syntax: JSON Keywords
 " Separated into a match and region because a region by itself is always greedy
 syn match  jsonKeywordMatch /"\([^"]\|\\\"\)\+"[[:blank:]\r\n]*\:/ contains=jsonKeyword
-if has('conceal') && g:vim_json_syntax_conceal == 1
-   syn region  jsonKeyword matchgroup=jsonQuote start=/"/  end=/"\ze[[:blank:]\r\n]*\:/ concealends contains=jsonEscape contained
-else
-   syn region  jsonKeyword matchgroup=jsonQuote start=/"/  end=/"\ze[[:blank:]\r\n]*\:/ contains=jsonEscape contained
-endif
+execute 'syn region  jsonKeyword matchgroup=' . keyword_quote_match_group . ' start=/"/  end=/"\ze[[:blank:]\r\n]*\:/ contains=jsonEscape contained' . conceal
 
 " Syntax: Escape sequences
 syn match   jsonEscape    "\\["\\/bfnrt]" contained
@@ -121,6 +129,8 @@ if version >= 508 || !exists("did_json_syn_inits")
   endif
   hi def link jsonQuote			Quote
   hi def link jsonNoise			Noise
+  hi def link jsonKeywordQuote	jsonKeyword
+  hi def link jsonStringQuote	jsonString
 endif
 
 let b:current_syntax = "json"

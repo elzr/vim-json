@@ -24,6 +24,7 @@ Specific customizations
 	* Warn about *trailing commas* after the last element in arrays or objects.
 	* (All warnings can be turned off with a `let g:vim_json_warnings=0` in your `vimrc`.) 
 * Recognize `.jsonp` file type. In [JSONP](http://stackoverflow.com/questions/2067472/what-is-jsonp-all-about), the wrapping function call at the beginning and the closing semicolon are recognized.
+* Added option for **colored quotes**. To enable it add `let g:vim_json_color_quotes=1` to your `.vimrc`.
 
 Screenshots
 -----------

@@ -11,6 +11,11 @@ if !exists("g:vim_json_syntax_conceal")
 	let g:vim_json_syntax_conceal = 1
 end
 
+"don't colorize quotes by default
+if !exists("g:vim_json_color_quotes")
+	let g:vim_json_color_quotes = 0
+end
+
 "have warnings by default
 if !exists("g:vim_json_warnings")
 	let g:vim_json_warnings = 1
