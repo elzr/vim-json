@@ -73,7 +73,7 @@ if (!exists("g:vim_json_warnings") || g:vim_json_warnings==1)
 	" Syntax: Watch out for missing commas between elements
   syn match   jsonMissingCommaError /\("\|\]\|\d\)\zs\_s\+\ze"/
   syn match   jsonMissingCommaError /\(\]\|\}\)\_s\+\ze"/ "arrays/objects as values
-  if (expand('%:e') !=? 'jsonl')
+  if (expand('%:e') !~? '\(cjson\|ndjson\|jsonl\)')
     syn match   jsonMissingCommaError /}\_s\+\ze{/ "objects as elements in an array
   endif
   syn match   jsonMissingCommaError /\(true\|false\)\_s\+\ze"/ "true/false as value
